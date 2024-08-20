@@ -4,7 +4,7 @@
 
 int solver(double a, double b, double c, double* x1, double* x2);
 void resultolis(int numsol, double x1, double x2);
-int input (double* coeff)
+int input (double* coeff);
 
 int main()
 {
