@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <assert.h>
 int solver(double a, double b, double c, double* x1, double* x2);
 int resultolis(int numsol, double x1, double x2);
 int input (double* a, double* b, double* c);
@@ -15,7 +16,12 @@ int main()
 
 int input (double* a, double* b, double* c)
 {
-    scanf ("%lf %lf %lf", a, b, c);
+    int x = scanf ("%lf %lf %lf", a, b, c);
+    if (x!=3)
+    {
+        printf("#Print correct a, b and c");
+        return
+    }
 }
 
 int resultolis(int numsol, double x1, double x2)
