@@ -8,16 +8,15 @@ enum roots
     NO_SOLUTIONS    = 0,
     ONE_ROOT        = 1,
     TWO_ROOTS       = 2,
-    INFINITE_ROOTS  = 3
-}; //C большой
+    INFINITE_ROOTS  = 3,
+};
 
-int solver(double a, double b, double c, double* x1, double* x2);
-void resultolis(int numsol, double x1, double x2);
+roots solver(double a, double b, double c, double* x1, double* x2);
+void resultolis(roots numsol, double x1, double x2);
 int input (double* coeff);
-int solvesquare (double a, double b, double c, double* x1, double* x2);
-int solvelinear (double a, double b, double c, double* x1, double* x2);
+roots solvesquare (double a, double b, double c, double* x1, double* x2);
+roots solvelinear (double b, double c, double* x1);
 int testing (int TestNum, double a, double b, double c, double x1right, double x2right, int numsolright);
-
 
 int main()
 {
@@ -28,7 +27,7 @@ int main()
 
     roots var = NO_SOLUTIONS;
 
-    int numsol = solver (a, b, c, &x1, &x2);
+    roots numsol = solver (a, b, c, &x1, &x2);
     resultolis (numsol, x1, x2);
 
     // t = testing (1, 0, 0, 0, 0, 0, 3);
@@ -46,6 +45,7 @@ int main()
 int input (double* coeff)
 {
     assert (coeff);
+
     while (scanf("%lf", coeff) != 1)
     {
         int ch = 0;
@@ -60,7 +60,7 @@ int input (double* coeff)
     return NO_SOLUTIONS;
 }
 
-void resultolis(int numsol, double x1, double x2)
+void resultolis(roots numsol, double x1, double x2)
 {
     switch(numsol)
     {
@@ -74,15 +74,14 @@ void resultolis(int numsol, double x1, double x2)
             break;
     }
 }
-
-int solver(double a, double b, double c, double* x1, double* x2) // разбить на 2 функции, одна из которых будет решать квадратное уравнение, второе линейное, enum
+roots solver(double a, double b, double c, double* x1, double* x2) // разбить на 2 функции, одна из которых будет решать квадратное уравнение, второе линейное, enum
 {
     assert(x1); // assert(x1 != nullptr)
     assert(x2);
 
     if (a == 0)
     {
-        return solvelinear (a, b, c, x1, x2);
+        return solvelinear (b, c, x1);
     }
     else
     {
@@ -90,15 +89,15 @@ int solver(double a, double b, double c, double* x1, double* x2) // разбит
     }
 }
 
-roots solvelinear (double a, double b, double c, double* x1, double* x2)
+roots solvelinear (double b, double c, double* x1)
 {
     assert(x1);
-    assert(x2);
+
     if (b == 0)
     {
         if (c == 0)
         {
-            return 3;
+            return INFINITE_ROOTS;
         }
         else
         {
@@ -117,7 +116,6 @@ roots solvesquare (double a, double b, double c, double* x1, double* x2)
     assert (x1);
     assert (x2);
     double D = b * b - 4 * a * c;
-
 
     if (D < 0)
     {
