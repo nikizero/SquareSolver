@@ -53,21 +53,21 @@ void resultolis(int numsol, double x1, double x2)
 
 int solver(double a, double b, double c, double* x1, double* x2) // разбить на 2 функции, одна из которых будет решать квадратное уравнение, второе линейное, enum
 
-{   if (a==0)
+{   if (a == 0)
     {
-       return solvelinear(a, b, c, x1, x2);
+        return solvelinear (a, b, c, x1, x2);
     }
     else
     {
-        return solvelinear(a, b, c, x1, x2);
+        return solvesquare (a, b, c, x1, x2);
     }
 }
 
 int solvelinear (double a, double b, double c, double* x1, double* x2)
 {
-    if (b==0)
+    if (b == 0)
     {
-        if (c==0)
+        if (c == 0)
         {
             return 3;
         }
@@ -78,27 +78,27 @@ int solvelinear (double a, double b, double c, double* x1, double* x2)
     }
     else
     {
-        *x1=-c/a;
+        *x1 = -c / a;
         return 1;
     }
 }
 
 int solvesquare (double a, double b, double c, double* x1, double* x2)
 {
-    double D = b*b - 4*a*c;
+    double D = b * b - 4 * a * c;
     if (D < 0)
     {
         return 0;
     }
     if (D == 0)
     {
-        *x1 = -b/2/a;
+        *x1 = -b / (2 * a);
         return 1;
     }
     else
     {
-        *x1 = (-b + sqrt(D))/2/a;
-        *x2 = (-b - sqrt(D))/2/a;
+        *x1 = (-b + sqrt(D)) / (2 * a);
+        *x2 = (-b - sqrt(D)) / (2 * a);
         return 2;
     }
 }
