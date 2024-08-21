@@ -7,6 +7,7 @@ void resultolis(int numsol, double x1, double x2);
 int input (double* coeff);
 int solvesquare (double a, double b, double c, double* x1, double* x2);
 int solvelinear (double a, double b, double c, double* x1, double* x2);
+int testing (double a, double b, double c, x1right, x2right, numsolright)
 
 
 int main()
@@ -18,6 +19,8 @@ int main()
 
     int numsol = solver (a, b, c, &x1, &x2);
     resultolis (numsol, x1, x2);
+
+
 }
 
 int input (double* coeff)
@@ -101,4 +104,16 @@ int solvesquare (double a, double b, double c, double* x1, double* x2)
         *x2 = (-b - sqrt(D)) / (2 * a);
         return 2;
     }
+}
+
+int testing (double a, double b, double c, x1right, x2right, numsolright)
+{
+    double x1 = 0, x2 = 0
+    int numsol = solver (a, b, c, &x1, &x2)
+    if (numsol != numsolright || x1 != x1right || x2 != x2right)
+    {
+        printf("Test Failed: a = %lf, b = %lf, c = %lf, x1 = %lf, x2 = %lf, numsol = %d\n"
+        "Right: x1right = %lf, x2right = %lf, numsolright = %lf", a, b, c)
+    }
+
 }
