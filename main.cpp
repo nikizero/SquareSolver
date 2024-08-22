@@ -49,18 +49,20 @@ int main()
 {
     Test etalon[] =
     {
-        {1, 0, 0, 0, 0, 0, INFINITE_ROOTS},
-        {2, 1, 0, 0, 0, 0, ONE_ROOT},
-        {3, 0, 2, -1, 0.5, 0, ONE_ROOT},
-        {4, 1, 2, 1, -1, ONE_ROOT},
-        {5, 0, 1, 0, 0, 0, ONE_ROOT},
-        {6, 0, 0, 1, 0, 0, NO_SOLUTIONS},
-        {7, 4, 3, 2, 0, 0, NO_SOLUTIONS},
-        {8, 4, 3, -1, 0.25, -1, TWO_ROOTS},
-        {9, 1, 2, 3, 0, 0, NO_SOLUTIONS}
+        {1, 0, 0,  0,  0,     0, INFINITE_ROOTS},
+        {2, 1, 0,  0,  0,     0, ONE_ROOT},
+        {3, 0, 2, -1,  0.5,   0, ONE_ROOT},
+        {4, 1, 2,  1, -1,     0, ONE_ROOT},
+        {5, 0, 1,  0,  0,     0, ONE_ROOT},
+        {6, 0, 0,  1,  0,     0, NO_SOLUTIONS},
+        {7, 4, 3,  2,  0,     0, NO_SOLUTIONS},
+        {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
+        {9, 1, 2,  3,  0,     0, NO_SOLUTIONS}
     };
 //    struct Quadr coefs = {0, 0, 0};                                         //Можно было задать как Quadr coefs = {.a = 0,.b = 0,.c = 0}
 //    struct Solution answer = {0, 0, NO_SOLUTIONS};
+    int numtests = sizeof(etalon)/sizeof(etalon[1]);
+    printf("%d \n", numtests);
 //
 //    Input (&coefs.a);
 //    Input (&coefs.b);
@@ -68,7 +70,7 @@ int main()
 //
 //    answer.num_roots = Solver (coefs, &answer);
 //    Itog (answer); // naming
-    for (int i = 0; i <= 9; i++)
+    for (int i = 0; i <= numtests; i++)
     {
         Testing (etalon[i]);
     }
