@@ -51,8 +51,7 @@ Roots Solver       (Quadr coefs, Solution* answer);
 Roots SolveLinear  (Quadr coefs, Solution* answer);
 Roots SolveSquare  (Quadr coefs, Solution* answer);
 void                CleanBuf();
-// void                AskMode(char* argv[1]);
-Modes Mode;
+Modes Mode; // bad
 
 int main(int argc, char* argv[])
 {
@@ -68,15 +67,15 @@ int main(int argc, char* argv[])
         {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
         {9, 1, 2,  3,  0,     0, NO_SOLUTIONS}
     };
-    size_t numtests = sizeof(etalon)/sizeof(etalon[0]); // sizeof() тип данных
+    size_t numtests = sizeof(etalon)/sizeof(etalon[0]);
 
     if (argc == 2)
     {
-        if (strcmp(argv[1], "--Hellp") == 0)
+        if (strcmp(argv[1], "--Help") == 0)
         {
-            printf("if you want start programm in test mode use \"--Test\" \n");                 //Как тут сделать вывод двух строк нормальный
-            printf("if you want start programm in SolveSquare mode use \"--Start\" \n");
-            exit(1);
+            fprintf(stderr, "if you want start programm in test mode use \"--Test\" \n");                 //Как тут сделать вывод двух строк нормальный
+            printf("if you want start programm in SolveSquare mode use \"--Start\" \n"); // stderr, stdin, stdout
+            return 1;
         }
         else if (strcmp(argv[1],  "--Test") == 0)
         {
@@ -89,13 +88,13 @@ int main(int argc, char* argv[])
         else
         {
             printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
-            exit(1);
+            return 1;
         }
     }
     else
     {
         printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
-        exit(1);
+        return 1;
     }
 
     if (Mode == START)
@@ -116,6 +115,8 @@ int main(int argc, char* argv[])
             Testing (etalon[i]);
         }
     }
+
+    return 0;
 }
 
 int Input (double* coeff)
@@ -151,6 +152,9 @@ void Itog(Solution answer)
 Roots Solver(Quadr coefs, Solution* answer)
 {
     assert(answer);
+    assert(isfinite(coefs -> a))
+    assert(isfinite(coefs -> b))
+    assert(isfinite(coefs -> c))
 
     if (coefs.a == 0)
     {
@@ -228,7 +232,7 @@ int Testing (Test etalon)
 void CleanBuf ()
 {
     int ch = 0;
-    while ((ch = getchar()) != '\n')
+    while ((ch = getchar()) != '\n' && ch != EOF)
         {
         }
 }
