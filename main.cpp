@@ -47,12 +47,12 @@ Roots SolveSquare  (Quadr coefs, Solution* answer);
 
 int main()
 {
-    Test etalon[10] =
+    Test etalon[] =
     {
         {1, 0, 0, 0, 0, 0, INFINITE_ROOTS},
         {2, 1, 0, 0, 0, 0, ONE_ROOT},
         {3, 0, 2, -1, 0.5, 0, ONE_ROOT},
-        {4, 1, 2, 1, -1, 0, ONE_ROOT},
+        {4, 1, 2, 1, -1, ONE_ROOT},
         {5, 0, 1, 0, 0, 0, ONE_ROOT},
         {6, 0, 0, 1, 0, 0, NO_SOLUTIONS},
         {7, 4, 3, 2, 0, 0, NO_SOLUTIONS},
@@ -68,7 +68,7 @@ int main()
 //
 //    answer.num_roots = Solver (coefs, &answer);
 //    Itog (answer); // naming
-    for (int i = 0; i <= 8; i++)
+    for (int i = 0; i <= 9; i++)
     {
         Testing (etalon[i]);
     }
@@ -168,10 +168,6 @@ Roots SolveSquare (Quadr coefs, Solution* answer)
 
 int Testing (Test etalon)
 {
-    //------------------------
-    //Как узнать длинну etalon?
-    //------------------------
-
     Solution answer = {0, 0, NO_SOLUTIONS};
     Quadr coefs = {etalon.a, etalon.b, etalon.c};
     answer.num_roots = Solver (coefs, &answer);
@@ -187,3 +183,6 @@ int Testing (Test etalon)
         return 1;
     }
 }
+
+//int p[] = {1,2,3,4};
+//printf("%d", p[1]);
