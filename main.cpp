@@ -25,7 +25,7 @@ struct Solution
     Roots num_roots;
 };
 
-//int testing (int TestNum, double a, double b, double c, double x1right, double x2right, int numsolright)
+//Если определить переменную структуры, при её объявлении, область её видимости на всю прогу?
 
 struct Test
 {
@@ -38,7 +38,7 @@ struct Test
     Roots numsolright;
 };
 
-int                Testing (Test etalon);
+int                Testing (Test etalon, int i);
 int                Input (double* coeff);
 void               Itog(Solution answer);
 Roots Solver       (Quadr coefs, Solution* answer);
@@ -47,28 +47,31 @@ Roots SolveSquare  (Quadr coefs, Solution* answer);
 
 int main()
 {
-    Quadr coefs = {0, 0, 0};
-    Solution answer = {0, 0, NO_SOLUTIONS};
-    Test etalon = {1, 0, 0, 0, 0, 0, INFINITE_ROOTS};
-
-    Input (&coefs.a);
-    Input (&coefs.b);
-    Input (&coefs.c);
-
-    answer.num_roots = Solver (coefs, &answer);
-    Itog (answer); // naming
-
-    Testing(etalon);
-    // testing (1, 0, 0, 0, 0, 0, 3);
-    // testing (2, 1, 0, 0, 0, 0, 1);
-    // testing (3, 0, 2, -1, 0.5, 0, 1);
-    // testing (4, 1, 2, 1, -1, 0, 1);
-    // testing (5, 0, 1, 0, 0, 0, 1);
-    // testing (6, 0, 0, 1, 0, 0, 0);
-    // testing (7, 4, 3, 2, 0, 0, 0);
-    // testing (8, 4, 3, -1, 0.25, -1, 2);
-    // testing (9, 1, 2, 3, 0, 0, 0);
-
+    Test etalon[10] =
+    {
+        {1, 0, 0, 0, 0, 0, INFINITE_ROOTS},
+        {2, 1, 0, 0, 0, 0, ONE_ROOT},
+        {3, 0, 2, -1, 0.5, 0, ONE_ROOT},
+        {4, 1, 2, 1, -1, 0, ONE_ROOT},
+        {5, 0, 1, 0, 0, 0, ONE_ROOT},
+        {6, 0, 0, 1, 0, 0, NO_SOLUTIONS},
+        {7, 4, 3, 2, 0, 0, NO_SOLUTIONS},
+        {8, 4, 3, -1, 0.25, -1, TWO_ROOTS},
+        {9, 1, 2, 3, 0, 0, NO_SOLUTIONS}
+    };
+//    struct Quadr coefs = {0, 0, 0};                                         //Можно было задать как Quadr coefs = {.a = 0,.b = 0,.c = 0}
+//    struct Solution answer = {0, 0, NO_SOLUTIONS};
+//
+//    Input (&coefs.a);
+//    Input (&coefs.b);
+//    Input (&coefs.c);
+//
+//    answer.num_roots = Solver (coefs, &answer);
+//    Itog (answer); // naming
+    for (int i = 1; i <= 8; i++)
+    {
+        Testing (etalon, i);
+    }
 }
 
 int Input (double* coeff)
@@ -163,20 +166,24 @@ Roots SolveSquare (Quadr coefs, Solution* answer)
     }
 }
 
-int Testing (Test etalon)
+int Testing (Test etalon, int i)
 {
-    Quadr coefs = {etalon.a, etalon.b, etalon.c};
+    //------------------------
+    //Как узнать длинну etalon?
+    //------------------------
+
     Solution answer = {0, 0, NO_SOLUTIONS};
+    Quadr coefs = {etalon[i].a, etalon[i].b, etalon[i].c};
     answer.num_roots = Solver (coefs, &answer);
-    if (answer.num_roots != etalon.numsolright || answer.x1 != etalon.x1right || answer.x2 != etalon.x2right)
+    if (answer.num_roots != etalon[i].numsolright || answer.x1 != etalon[i].x1right || answer.x2 != etalon[i].x2right)
     {
         printf("Test N %d Failed: a = %lf, b = %lf, c = %lf, x1 = %lf, x2 = %lf, num_roots = %d\n"
-        "Right Test: x1right = %lf, x2right = %lf, numsolright = %d \n", etalon.TestNum, etalon.a, etalon.b, etalon.c, answer.x1, answer.x2, answer.num_roots, etalon.x1right, etalon.x2right, etalon.numsolright);
+        "Right Test: x1right = %lf, x2right = %lf, numsolright = %d \n", etalon[i].TestNum, etalon[i].a, etalon[i].b, etalon[i].c, answer.x1, answer.x2, answer.num_roots, etalon[i].x1right, etalon[i].x2right, etalon[i].numsolright);
         return 0;
     }
     else
     {
-        printf("Test N %d correct \n", etalon.TestNum);
+        printf("Test N %d correct \n", etalon[i].TestNum);
         return 1;
     }
 }
