@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
         {2, 1, 0,  0,  0,     0, ONE_ROOT},
         {3, 0, 2, -1,  0.5,   0, ONE_ROOT},
         {4, 1, 2,  1, -1,     0, ONE_ROOT},
-        {5, 0, 1,  0,  0,     0, ONE_ROOT},                 //сделать проверку на IFINITY
+        {5, 0, 1,  0,  0,     0, ONE_ROOT},
         {6, 0, 0,  1,  0,     0, NO_SOLUTIONS},
         {7, 4, 3,  2,  0,     0, NO_SOLUTIONS},
         {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     {
         if (strcmp(argv[1], "--Help") == 0)
         {
-            fprintf(stderr, "if you want start programm in test mode use \"--Test\" \n");                 //Как тут сделать вывод двух строк нормальный
+            fprintf(stderr, "if you want start programm in test mode use \"--Test\" \n"); //Как тут сделать вывод двух строк нормальный
             printf("if you want start programm in SolveSquare mode use \"--Start\" \n"); // stderr, stdin, stdout
             return 1;
         }
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
     }
     if (Mode == TEST)
     {
-        for (int i = 0; i < numtests; i++)
+        for (size_t i = 0; i < numtests; i++)
         {
             Testing (etalon[i]);
         }
@@ -79,3 +79,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
