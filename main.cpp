@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 enum Roots
 {
@@ -9,6 +10,12 @@ enum Roots
     ONE_ROOT        = 1,
     TWO_ROOTS       = 2,
     INFINITE_ROOTS  = 3,
+};
+
+enum Modes
+{
+    TEST            = 0,
+    START           = 1,
 };
 
 struct Quadr
@@ -25,7 +32,6 @@ struct Solution
     Roots num_roots;
 };
 
-//Если определить переменную структуры, при её объявлении, область её видимости на всю прогу?
 
 struct Test
 {
@@ -44,8 +50,11 @@ void               Itog(Solution answer);
 Roots Solver       (Quadr coefs, Solution* answer);
 Roots SolveLinear  (Quadr coefs, Solution* answer);
 Roots SolveSquare  (Quadr coefs, Solution* answer);
+void                CleanBuf();
+// void                AskMode(char* argv[1]);
+Modes Mode;
 
-int main()
+int main(int argc, char* argv[])
 {
     Test etalon[] =
     {
@@ -59,20 +68,51 @@ int main()
         {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
         {9, 1, 2,  3,  0,     0, NO_SOLUTIONS}
     };
-//    struct Quadr coefs = {0, 0, 0};                                         //Можно было задать как Quadr coefs = {.a = 0,.b = 0,.c = 0}
-//    struct Solution answer = {0, 0, NO_SOLUTIONS};
-    int numtests = sizeof(etalon)/sizeof(etalon[1]);
-    printf("%d \n", numtests);
-//
-//    Input (&coefs.a);
-//    Input (&coefs.b);
-//    Input (&coefs.c);
-//
-//    answer.num_roots = Solver (coefs, &answer);
-//    Itog (answer); // naming
-    for (int i = 0; i <= numtests; i++)
+    size_t numtests = sizeof(etalon)/sizeof(etalon[0]); // sizeof() тип данных
+
+    if (argc == 2)
     {
-        Testing (etalon[i]);
+        if (strcmp(argv[1], "--Hellp") == 0)
+        {
+            printf("if you want start programm in test mode use \"--Test\" \n");                 //Как тут сделать вывод двух строк нормальный
+            printf("if you want start programm in SolveSquare mode use \"--Start\" \n");
+            exit(1);
+        }
+        else if (strcmp(argv[1],  "--Test") == 0)
+        {
+            Mode = TEST;
+        }
+        else if (strcmp(argv[1],  "--Start") == 0)
+        {
+            Mode = START;
+        }
+        else
+        {
+            printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+            exit(1);
+        }
+    }
+    else
+    {
+        printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+        exit(1);
+    }
+
+    if (Mode == START)
+    {
+        struct Quadr coefs = {0, 0, 0};                                         //Можно было задать как Quadr coefs = {.a = 0,.b = 0,.c = 0}
+        struct Solution answer = {0, 0, NO_SOLUTIONS};
+        Input (&coefs.a);
+        Input (&coefs.b);
+        Input (&coefs.c);
+
+    }
+    if (Mode == TEST)
+    {
+        for (int i = 0; i <= numtests; i++)
+        {
+            Testing (etalon[i]);
+        }
     }
 }
 
@@ -82,10 +122,7 @@ int Input (double* coeff)
 
     while (scanf("%lf", coeff) != 1)
     {
-        int ch = 0;
-        while ((ch = getchar()) != '\n')
-            {
-            }
+        CleanBuf();
 
         printf("#Print correct coeff\n");
 
@@ -186,5 +223,11 @@ int Testing (Test etalon)
     }
 }
 
-//int p[] = {1,2,3,4};
-//printf("%d", p[1]);
+void CleanBuf ()
+{
+    int ch = 0;
+    while ((ch = getchar()) != '\n')
+        {
+        }
+}
+
