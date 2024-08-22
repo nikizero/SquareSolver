@@ -8,7 +8,6 @@
 
 int                Testing (Test etalon);
 
-
 int Testing (Test etalon)
 {
     Solution answer = {0, 0, NO_SOLUTIONS};
