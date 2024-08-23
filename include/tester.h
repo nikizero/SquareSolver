@@ -1,11 +1,19 @@
+/*!
+\file
+\brief Заголовочный файл с описанием классов, используемых для тестисрования программы
+
+Данный файл содержит в себе определения необходимых классов для задания
+парметров UNIT тестирования программы. используемых в tester.cpp.
+*/
+
 #ifndef TESTER_INCLUDE
 #define TESTER_INCLUDE
 #include "solve.h"
 
-enum CompareResult
+enum Res_Test
 {
-    NON_EQUAL    = 0,
-    EQUAL        = 1,
+    FAIL        = 0,
+    PASS        = 1,
 };
 
 struct Test
@@ -19,7 +27,6 @@ struct Test
     Roots numsolright;
 };
 
-int                Testing (Test etalon);
+Res_Test           Testing (Test etalon);
 void               StartTest ();
-CompareResult      compare(double a, double b);
 #endif
