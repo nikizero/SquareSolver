@@ -46,24 +46,26 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
     {
         if (strcmp(argv[1], "--help") == 0)
         {
-            fprintf(stderr, "if you want start programm in test mode use \"--test\" \n"); //Как тут сделать вывод двух строк нормальный
-            printf("if you want start programm in SolveSquare mode use \"--start\" \n"); // stderr, stdin, stdout, прочитать про логи и перенаправление потоков вывода
+            printf(GREEN_COLOR "# if you want start programm in test mode use \"--test\" \n" NO_COLOR); //Как тут сделать вывод двух строк нормальный
+            printf(GREEN_COLOR "# if you want start programm in SolveSquare mode use \"--start\" \n" NO_COLOR); // stderr, stdin, stdout, прочитать про логи и перенаправление потоков вывода
         }
         else if (strcmp(argv[1],  "--test") == 0)
         {
             *Mode = TEST;
+             printf("# Test mode acivated \n");
         }
         else if (strcmp(argv[1],  "--start") == 0)
         {
             *Mode = START;
+            printf(GREEN_COLOR "# Print coef a, b, c in format \"a b c\" \n" NO_COLOR);
         }
         else
         {
-            printf("ERROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
+            fprintf(stderr, RED_COLOR "# ERROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n" NO_COLOR);
         }
     }
     else
     {
-        printf("ERROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
+        fprintf(stderr, RED_COLOR "# ERROR: UNEXPECTED COMMAND \n #if you want get all useful command use \"--help\" \n" NO_COLOR);
     }
 }

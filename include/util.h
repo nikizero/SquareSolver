@@ -2,6 +2,10 @@
 #define UTIL_INCLUDE
 #include "solve.h"
 
+#define RED_COLOR               "\033[31m"
+#define NO_COLOR                "\033[0m"
+#define GREEN_COLOR             "\033[32m"
+
 enum Modes
 {
     TEST                 = 0,
