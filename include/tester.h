@@ -2,7 +2,7 @@
 #define TESTER_INCLUDE
 #include "solve.h"
 
-enum ComareResult
+enum CompareResult
 {
     NON_EQUAL    = 0,
     EQUAL        = 1,
@@ -21,5 +21,5 @@ struct Test
 
 int                Testing (Test etalon);
 void               StartTest ();
-int                compare(duble a, duble b);
+CompareResult      compare(double a, double b);
 #endif

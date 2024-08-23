@@ -13,6 +13,9 @@ Roots Solver(Quadr coefs, Solution* answer)
     assert(isfinite(coefs.b));
     assert(isfinite(coefs.c));
 
+    answer -> x1 = NAN;
+    answer -> x2 = NAN;
+
     if (coefs.a == 0)
     {
         return SolveLinear (coefs, answer);
@@ -31,8 +34,6 @@ Roots SolveLinear (Quadr coefs, Solution* answer)
     {
         if (coefs.c == 0)
         {
-            answer -> x1 = NAN;
-            answer -> x2 = NAN;
             return INFINITE_ROOTS;
         }
         else
@@ -55,8 +56,6 @@ Roots SolveSquare (Quadr coefs, Solution* answer)
 
     if (D < 0)
     {
-        answer -> x1 = NAN;
-        answer -> x2 = NAN;
         return NO_SOLUTIONS;
     }
     else if (D == 0)

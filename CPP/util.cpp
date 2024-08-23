@@ -57,7 +57,7 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
         else if (strcmp(argv[1],  "--start") == 0)
         {
             *Mode = START;
-            printf(GREEN_COLOR "# Print coef a, b, c in format \"a b c\" \n" NO_COLOR);
+            printf(GREEN_COLOR "# Print coef a, b and c in format \"a b c\" \n" NO_COLOR);
         }
         else
         {
