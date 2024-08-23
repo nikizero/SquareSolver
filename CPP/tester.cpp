@@ -8,7 +8,9 @@
 
 int                Testing (Test etalon);
 
-Test etalon[] =
+void StartTest ()
+{
+    Test etalon[] =
     {
         {1, 0, 0,  0,  0,     0, INFINITE_ROOTS},
         {2, 1, 0,  0,  0,     0, ONE_ROOT},
@@ -20,9 +22,6 @@ Test etalon[] =
         {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
         {9, 1, 2,  3,  0,     0, NO_SOLUTIONS}
     };
-
-void StartTest ()
-{
     size_t numtests = sizeof(etalon)/sizeof(etalon[0]);
 
     for (size_t i = 0; i < numtests; i++)

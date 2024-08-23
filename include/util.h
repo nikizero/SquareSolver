@@ -9,6 +9,7 @@ enum Modes
 };
 
 // bash script; main на функции;
+
 /*
 Input -
 
@@ -16,6 +17,7 @@ Input -
 
 return: coeff
 */
+
 int                Input (double* coeff);
 void               Itog(Solution answer);
 void               CleanBuf();

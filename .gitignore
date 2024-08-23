@@ -1,3 +1,7 @@
-
+solve.o
+tester.o
+util.o
+main.o
+mipt
 a.out
 .DS_Store
