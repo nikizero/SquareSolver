@@ -8,9 +8,9 @@
 #include "../include/tester.h"
 #include "../include/util.h"
 
-int main(int argc, const char* argv[])                                          //!!!!!
+int main(int argc, const char** argv)                                          //сделать весь пайплайн для const char!!! решает баг копирования
 {
-    Modes Mode = START;
+    Modes Mode = INITIALIZE;
     ModeSwitch(&Mode, argv, argc);
 
     if (Mode == START)
@@ -28,8 +28,6 @@ int main(int argc, const char* argv[])                                          
     {
         StartTest();
     }
-
-
 
     return 0;
 }

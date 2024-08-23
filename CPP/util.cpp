@@ -35,22 +35,19 @@ int Input (double* coeff)
     while (scanf("%lf", coeff) != 1)
     {
         CleanBuf();
-
         printf("#Print correct coeff\n");
-
     }
-
-    return NO_SOLUTIONS;
+    return 0;
 }
 
-void ModeSwitch (Modes* Mode, char* argv[], int argc)
+void ModeSwitch (Modes* Mode, const char** argv, int argc)
 {
     if (argc == 2)
     {
         if (strcmp(argv[1], "--help") == 0)
         {
             fprintf(stderr, "if you want start programm in test mode use \"--test\" \n"); //Как тут сделать вывод двух строк нормальный
-            fprintf("if you want start programm in SolveSquare mode use \"--start\" \n"); // stderr, stdin, stdout
+            printf("if you want start programm in SolveSquare mode use \"--start\" \n"); // stderr, stdin, stdout, прочитать про логи и перенаправление потоков вывода
         }
         else if (strcmp(argv[1],  "--test") == 0)
         {
@@ -62,11 +59,11 @@ void ModeSwitch (Modes* Mode, char* argv[], int argc)
         }
         else
         {
-            fprintf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
+            printf("ERROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
         }
     }
     else
     {
-        fprintf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
+        printf("ERROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
     }
 }
