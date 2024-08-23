@@ -21,5 +21,5 @@ return: coeff
 int                Input (double* coeff);
 void               Itog(Solution answer);
 void               CleanBuf();
-void                ModeSwitch(Modes* Mode, char* argv[1], int argc);
+void                ModeSwitch(Modes* Mode, char* argv[], int argc);
 #endif

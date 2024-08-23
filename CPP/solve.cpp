@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+
 #include "../include/solve.h"
 
 Roots Solver(Quadr coefs, Solution* answer)

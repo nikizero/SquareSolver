@@ -5,8 +5,6 @@
 #include <string.h>
 #include "../include/util.h"
 
-
-
 void Itog(Solution answer)
 {
     switch(answer.num_roots)
@@ -44,30 +42,31 @@ int Input (double* coeff)
 
     return NO_SOLUTIONS;
 }
-void ModeSwitch (Modes* Mode,  char* argv[1], int argc)
+
+void ModeSwitch (Modes* Mode, char* argv[], int argc)
 {
     if (argc == 2)
     {
-        if (strcmp(argv[1], "--Help") == 0)
+        if (strcmp(argv[1], "--help") == 0)
         {
-            fprintf(stderr, "if you want start programm in test mode use \"--Test\" \n"); //Как тут сделать вывод двух строк нормальный
-            printf("if you want start programm in SolveSquare mode use \"--Start\" \n"); // stderr, stdin, stdout
+            fprintf(stderr, "if you want start programm in test mode use \"--test\" \n"); //Как тут сделать вывод двух строк нормальный
+            fprintf("if you want start programm in SolveSquare mode use \"--start\" \n"); // stderr, stdin, stdout
         }
-        else if (strcmp(argv[1],  "--Test") == 0)
+        else if (strcmp(argv[1],  "--test") == 0)
         {
             *Mode = TEST;
         }
-        else if (strcmp(argv[1],  "--Start") == 0)
+        else if (strcmp(argv[1],  "--start") == 0)
         {
             *Mode = START;
         }
         else
         {
-            printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+            fprintf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
         }
     }
     else
     {
-        printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+        fprintf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--help\" \n");
     }
 }
