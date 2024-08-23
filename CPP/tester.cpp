@@ -8,6 +8,29 @@
 
 int                Testing (Test etalon);
 
+Test etalon[] =
+    {
+        {1, 0, 0,  0,  0,     0, INFINITE_ROOTS},
+        {2, 1, 0,  0,  0,     0, ONE_ROOT},
+        {3, 0, 2, -1,  0.5,   0, ONE_ROOT},
+        {4, 1, 2,  1, -1,     0, ONE_ROOT},
+        {5, 0, 1,  0,  0,     0, ONE_ROOT},
+        {6, 0, 0,  1,  0,     0, NO_SOLUTIONS},
+        {7, 4, 3,  2,  0,     0, NO_SOLUTIONS},
+        {8, 4, 3, -1,  0.25, -1, TWO_ROOTS},
+        {9, 1, 2,  3,  0,     0, NO_SOLUTIONS}
+    };
+
+void StartTest ()
+{
+    size_t numtests = sizeof(etalon)/sizeof(etalon[0]);
+
+    for (size_t i = 0; i < numtests; i++)
+        {
+            Testing (etalon[i]);
+        }
+}
+
 int Testing (Test etalon)
 {
     Solution answer = {0, 0, NO_SOLUTIONS};

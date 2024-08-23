@@ -2,6 +2,12 @@
 #define UTIL_INCLUDE
 #include "solve.h"
 
+enum Modes
+{
+    TEST            = 0,
+    START           = 1,
+};
+
 // bash script; main на функции;
 /*
 Input -
@@ -13,4 +19,5 @@ return: coeff
 int                Input (double* coeff);
 void               Itog(Solution answer);
 void               CleanBuf();
+void                ModeSwitch(Modes* Mode, char* argv[1], int argc);
 #endif

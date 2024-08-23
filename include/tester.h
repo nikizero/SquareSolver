@@ -14,4 +14,5 @@ struct Test
 };
 
 int                Testing (Test etalon);
+void               StartTest ();
 #endif

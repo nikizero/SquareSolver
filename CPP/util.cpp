@@ -44,3 +44,30 @@ int Input (double* coeff)
 
     return NO_SOLUTIONS;
 }
+void ModeSwitch (Modes* Mode,  char* argv[1], int argc)
+{
+    if (argc == 2)
+    {
+        if (strcmp(argv[1], "--Help") == 0)
+        {
+            fprintf(stderr, "if you want start programm in test mode use \"--Test\" \n"); //Как тут сделать вывод двух строк нормальный
+            printf("if you want start programm in SolveSquare mode use \"--Start\" \n"); // stderr, stdin, stdout
+        }
+        else if (strcmp(argv[1],  "--Test") == 0)
+        {
+            *Mode = TEST;
+        }
+        else if (strcmp(argv[1],  "--Start") == 0)
+        {
+            *Mode = START;
+        }
+        else
+        {
+            printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+        }
+    }
+    else
+    {
+        printf("EROR: UNEXPECTED COMMAND \n if you want get all useful command use \"--Hellp\" \n");
+    }
+}
