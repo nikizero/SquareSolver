@@ -59,9 +59,9 @@ static Roots SolveLinear (Quadr coefs, Solution* answer)
 {
     assert(answer);
 
-    if (coefs.b == 0)
+    if (compare (coefs.b, 0) == EQUAL)
     {
-        if (coefs.c == 0)
+        if (compare (coefs.c, 0) ==  EQUAL)
         {
             return INFINITE_ROOTS;
         }
@@ -89,6 +89,7 @@ static Roots SolveSquare (Quadr coefs, Solution* answer)
     assert (answer);
 
     double D = coefs.b * coefs.b - 4 * coefs.a * coefs.c;
+    double Sqrt_D = sqrt(D);
 
     if (D < 0)
     {
@@ -101,8 +102,8 @@ static Roots SolveSquare (Quadr coefs, Solution* answer)
     }
     else
     {
-        answer -> x1 = (-coefs.b + sqrt(D)) / (2 * coefs.a);
-        answer -> x2 = (-coefs.b - sqrt(D)) / (2 * coefs.a);
+        answer -> x1 = (-coefs.b + Sqrt_D) / (2 * coefs.a);
+        answer -> x2 = (-coefs.b - Sqrt_D) / (2 * coefs.a);
         return TWO_ROOTS;
     }
 }

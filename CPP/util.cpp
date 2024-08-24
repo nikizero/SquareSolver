@@ -43,14 +43,14 @@ void Itog(Solution answer)
 
 static void CleanBuf ()
 {
-    int ch = 0;
+    int ch = 0;                                                                                  //TODO: why int
     while ((ch = getchar()) != '\n' && ch != EOF)
         {
         }
 }
 
 /*!
- Обрабатывает ввод коэффицента уравнения. Если ввод неправильный,
+Обрабатывает ввод коэффицента уравнения. Если ввод неправильный,
 очищает буфер, делает повторный запрос и вывод ошибку.
 \param[out] coeff адресс поля структурной переменой, содержащей очередной коэффицент уравнения
 */
@@ -59,7 +59,9 @@ void Input (double* coeff)
 {
     assert (coeff);
 
-    while (scanf("%lf", coeff) != 1 || getchar() != '\n')
+    int ch = 0;
+
+    while (scanf("%lf", coeff) != 1 || (ch = getchar()) != '\n'|| ch == EOF)
     {
         CleanBuf();
         printf(RED_COLOR "#Print correct coeff\n" NO_COLOR);
@@ -107,17 +109,16 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
 Сравнивает два double числа, также NAN методом сравнивания модули разности с
 допустимой погрешностью эпсилон e
 \param[in] a, b сравниваемые числа
-\param[out] Mode адрес переменно, хранящей режим работы программы
 \return возвращает результат сравнения
 */
 
 CompareResult compare(double a, double b)
 {
-    double e = 1e-6;
+    const double epsilon = 1e-6; //!renam
     int StatNan_a = isnan(a);
     int StatNan_b = isnan(b);
 
-    if (fabs(a - b) < e || (StatNan_a == 1 && StatNan_b == 1))
+    if (fabs(a - b) < epsilon || (StatNan_a == 1 && StatNan_b == 1))
     {
         return EQUAL;
     }
