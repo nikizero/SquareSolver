@@ -1,6 +1,6 @@
 /*!
 \file
-\brief Заголовочный файл с описанием классов,
+\brief Заголовочный файл с описанием типов данных и функций,
  используемых для обработки квадратного уравнения
 
 Данный файл содержит в себе определения стуктур, необходимых для задания
@@ -10,6 +10,9 @@
 #ifndef SOLVE_INCLUDE
 #define SOLVE_INCLUDE
 
+/*!
+	\brief enum, содержащий количество корней заданного уравнения
+*/
 enum Roots
 {
     NO_SOLUTIONS    = 0,
@@ -18,6 +21,9 @@ enum Roots
     INFINITE_ROOTS  = 3,
 };
 
+/*!
+	\brief структура, содержащая коэффиценты заданного уравнения
+*/
 
 struct Quadr
 {
@@ -26,6 +32,9 @@ struct Quadr
   double c;
 };
 
+/*!
+	\brief структура, содержащая решения заданного уравнения и количество его решений
+*/
 struct Solution
 {
     double x1;
@@ -34,6 +43,4 @@ struct Solution
 };
 
 Roots Solver       (Quadr coefs, Solution* answer);
-Roots SolveLinear  (Quadr coefs, Solution* answer);
-Roots SolveSquare  (Quadr coefs, Solution* answer);
 #endif

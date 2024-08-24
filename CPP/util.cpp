@@ -1,6 +1,6 @@
 /*!
 \file
-\brief Исполняемый файл с описанием функций,
+\brief файл с описанием функций,
  используемых во вспомогательных операциях внутри функции main и др.
 
 Под вспомогательными операциями имеется ввиду обработка ввода,
@@ -15,6 +15,8 @@
 
 #include "../include/util.h"
 
+static void CleanBuf ();
+
 /*!
 Формирует вывод после решения уравнения о его конях
 \param[in] answer структурная переменная, содержащая корни и количество решений
@@ -24,13 +26,13 @@ void Itog(Solution answer)
 {
     switch(answer.num_roots)
     {
-        case NO_SOLUTIONS:      printf("# No solutions \n");
+        case NO_SOLUTIONS:      printf(FIOLET_COLOR"# No solutions \n" NO_COLOR);
             break;
-        case ONE_ROOT:          printf("# x1 = %lf \n", answer.x1);
+        case ONE_ROOT:          printf(YELOW_COLOR "# x1 = %lf \n" NO_COLOR, answer.x1);
             break;
-        case TWO_ROOTS:         printf("# x1 = %lf, x2 = %lf \n", answer.x1, answer.x2);
+        case TWO_ROOTS:         printf(YELOW_COLOR "# x1 = %lf," BLUE_COLOR " x2 = %lf \n" NO_COLOR, answer.x1, answer.x2);
             break;
-        case INFINITE_ROOTS:    printf("# All real numbers \n");
+        case INFINITE_ROOTS:    printf(FIOLET_COLOR "# All real numbers \n" NO_COLOR);
             break;
     }
 }
@@ -39,7 +41,7 @@ void Itog(Solution answer)
 Очищает буфер до enter или конца файла
 */
 
-void CleanBuf ()
+static void CleanBuf ()
 {
     int ch = 0;
     while ((ch = getchar()) != '\n' && ch != EOF)
@@ -50,14 +52,14 @@ void CleanBuf ()
 /*!
  Обрабатывает ввод коэффицента уравнения. Если ввод неправильный,
 очищает буфер, делает повторный запрос и вывод ошибку.
-\param[in] coeff адресс поля структурной переменой, содержащей очередной коэффицент уравнения
+\param[out] coeff адресс поля структурной переменой, содержащей очередной коэффицент уравнения
 */
 
 void Input (double* coeff)
 {
     assert (coeff);
 
-    while (scanf("%lf", coeff) != 1)
+    while (scanf("%lf", coeff) != 1 || getchar() != '\n')
     {
         CleanBuf();
         printf(RED_COLOR "#Print correct coeff\n" NO_COLOR);
@@ -77,8 +79,8 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
     {
         if (strcmp(argv[1], "--help") == 0)
         {
-            printf(GREEN_COLOR "# if you want start programm in test mode use \"--test\" \n" NO_COLOR); //Как тут сделать вывод двух строк нормальный
-            printf(GREEN_COLOR "# if you want start programm in SolveSquare mode use \"--start\" \n" NO_COLOR); // stderr, stdin, stdout, прочитать про логи и перенаправление потоков вывода
+            printf(GREEN_COLOR "# if you want start programm in test mode use \"--test\" \n" NO_COLOR);
+            printf(GREEN_COLOR "# if you want start programm in SolveSquare mode use \"--start\" \n" NO_COLOR);
         }
         else if (strcmp(argv[1],  "--test") == 0)
         {
@@ -88,7 +90,7 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
         else if (strcmp(argv[1],  "--start") == 0)
         {
             *Mode = START;
-            printf(GREEN_COLOR "# Print coef a, b and c in format \"a b c\" \n" NO_COLOR);
+            printf(GREEN_COLOR "# Print coef a, b and c in format: \na \nb \nc  \n" NO_COLOR);
         }
         else
         {
@@ -111,7 +113,7 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
 
 CompareResult compare(double a, double b)
 {
-    double e = 0.0000001;
+    double e = 1e-6;
     int StatNan_a = isnan(a);
     int StatNan_b = isnan(b);
 

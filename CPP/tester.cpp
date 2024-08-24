@@ -1,8 +1,9 @@
 /*!
 \file
-\brief Исполяемый файл для описания функций,
+\brief файл с описанием функций и типов данных,
  тестирующих программу
 */
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -12,6 +13,8 @@
 #include "../include/tester.h"
 #include "../include/solve.h"
 #include "../include/util.h"
+
+static Res_Test Testing (Test etalon);
 
 /*!
 Задает массив структурных перменных, содержащих данные UNIT теста.
@@ -40,7 +43,7 @@ void StartTest ()
         {16,  1e-3, -2e-3, 1,  NAN,       NAN,       NO_SOLUTIONS  },
         {17, -1e-3, -2e-3, 1, -32.638584, 30.638584, TWO_ROOTS     }
     };
-    size_t numtests = sizeof(etalon)/sizeof(etalon[0]);
+    size_t numtests = sizeof(etalon) / sizeof(etalon[0]);
 
     for (size_t i = 0; i < numtests; i++)
         {
@@ -57,7 +60,7 @@ void StartTest ()
 \return возвращает результат теста
 */
 
-Res_Test Testing (Test etalon)
+static Res_Test Testing (Test etalon)
 {
     Solution answer = {0, 0, NO_SOLUTIONS};
     Quadr coefs     = {etalon.a, etalon.b, etalon.c};

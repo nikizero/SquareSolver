@@ -1,7 +1,7 @@
 /*!
 \file
-\brief Исполняемый файл с описанием функций,
- используемых для решения квадратных уравнений
+\brief файл с описанием функций,
+ используемых для решения заданных уравнений
 
 В этом файле описаны функции для получения решений квадратного
 или линейного уравнения, а также для распознования типа заданного уравнения
@@ -14,9 +14,14 @@
 #include <string.h>
 
 #include "../include/solve.h"
+#include "../include/util.h"
+
+static Roots SolveSquare (Quadr coefs, Solution* answer);
+static Roots SolveLinear (Quadr coefs, Solution* answer);
+
 
 /*!
-Проверяет введеные коэффиценты квадратного уравнения, определяет тип введеного уравнения.
+Проверяет введеные коэффиценты уравнения, определяет тип введеного уравнения.
  В зависимости от типа уравнения, запускает функцию по его решению
 \param[in] coefs структурная переменная, содержащая коэффиценты уравнения
 \param[out] answer структурная переменная, в которую запишется решение
@@ -50,7 +55,7 @@ Roots Solver(Quadr coefs, Solution* answer)
 \return возвращает количество решений
 */
 
-Roots SolveLinear (Quadr coefs, Solution* answer)
+static Roots SolveLinear (Quadr coefs, Solution* answer)
 {
     assert(answer);
 
@@ -79,7 +84,7 @@ Roots SolveLinear (Quadr coefs, Solution* answer)
 \return возвращает количество решений
 */
 
-Roots SolveSquare (Quadr coefs, Solution* answer)
+static Roots SolveSquare (Quadr coefs, Solution* answer)
 {
     assert (answer);
 
@@ -89,7 +94,7 @@ Roots SolveSquare (Quadr coefs, Solution* answer)
     {
         return NO_SOLUTIONS;
     }
-    else if (D == 0)
+    else if (compare(D, 0) == EQUAL)
     {
         answer -> x1 = -coefs.b / (2 * coefs.a);
         return ONE_ROOT;

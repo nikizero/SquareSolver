@@ -1,7 +1,5 @@
-solve.o
-tester.o
-util.o
-main.o
+*.o
 mipt
 a.out
 .DS_Store
+Doc
