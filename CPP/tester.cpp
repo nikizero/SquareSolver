@@ -32,14 +32,14 @@ void StartTest ()
         {5,   0,     1,    0,  0,         NAN,       ONE_ROOT      },
         {6,   0,     0,    1,  NAN,       NAN,       NO_SOLUTIONS  },
         {7,   4,     3,    2,  NAN,       NAN,       NO_SOLUTIONS  },
-        {8,   4,     3,   -1,  0.25,     -1,         TWO_ROOTS     },
+        {8,   4,     3,   -1,  0.25,      -1,        TWO_ROOTS     },
         {9,   1,     2,    3,  NAN,       NAN,       NO_SOLUTIONS  },
         {10,  1,     0,   -4,  2,        -2,         TWO_ROOTS     },
         {11,  0,     0,   -4,  NAN,       NAN,       NO_SOLUTIONS  },
         {12,  0,     4,   -4,  1,         NAN,       ONE_ROOT      },
         {13,  0,     1,    0,  0,         NAN,       ONE_ROOT      },
         {14,  1,     1,    0,  0,         -1,        TWO_ROOTS     },
-        {15,  1,     1,   -2,  1,         -2,        TWO_ROOTS     },
+        {15,  1,     1,   -2,  1,         2,        TWO_ROOTS     },
         {16,  1e-3, -2e-3, 1,  NAN,       NAN,       NO_SOLUTIONS  },
         {17, -1e-2, -2e-4, 3, -17.330511, 17.310511, TWO_ROOTS     }
     };
@@ -66,13 +66,13 @@ static Res_Test Testing (Test etalon)
     Quadr coefs     = {etalon.a, etalon.b, etalon.c};
 
     answer.num_roots = Solver (coefs, &answer);
-    CompareResult compare_x1_res       = compare (answer.x1, etalon.x1right);
-    CompareResult compare_x2_res       = compare (answer.x2, etalon.x2right);
+    CompareResult compare_x1_res = compare (answer.x1, etalon.x1right);
+    CompareResult compare_x2_res = compare (answer.x2, etalon.x2right); //Сделать  %+lf
 
     if (answer.num_roots != etalon.numsolright || compare_x1_res == NON_EQUAL || compare_x2_res == NON_EQUAL)
     { //REFORMAT
-        printf(RED_COLOR "Test N %d Failed:" NO_COLOR " a = %lf, b = %lf, c = %lf, x1      = %lf, x2      = %lf, num_roots   = %d\n"
-               RED_COLOR "Right Test:      " NO_COLOR "                                             x1right = %lf, x2right = %lf, numsolright = %d \n", etalon.TestNum, etalon.a, etalon.b, etalon.c, answer.x1, answer.x2, answer.num_roots, etalon.x1right, etalon.x2right, etalon.numsolright);
+        printf(RED_COLOR "Test N %d Failed:" NO_COLOR " a = %lf, b = %lf, c = %lf, x1      = %+lf, x2      = %+lf, num_roots   = %d\n"
+               RED_COLOR "Right Test:      " NO_COLOR "                                            x1right = %+lf, x2right = %+lf, numsolright = %d \n", etalon.TestNum, etalon.a, etalon.b, etalon.c, answer.x1, answer.x2, answer.num_roots, etalon.x1right, etalon.x2right, etalon.numsolright);
         printf(RED_COLOR "Test's stoped after first failed test" NO_COLOR);
         return FAIL;
     }

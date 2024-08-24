@@ -43,7 +43,7 @@ void Itog(Solution answer)
 
 static void CleanBuf ()
 {
-    int ch = 0;                                                                                  //TODO: why int
+    int ch = 0;
     while ((ch = getchar()) != '\n' && ch != EOF)
         {
         }
@@ -55,7 +55,7 @@ static void CleanBuf ()
 \param[out] coeff адресс поля структурной переменой, содержащей очередной коэффицент уравнения
 */
 
-void Input (double* coeff)
+void Input (double* coeff, const int number_coeff)
 {
     assert (coeff);
 
@@ -65,6 +65,11 @@ void Input (double* coeff)
     {
         CleanBuf();
         printf(RED_COLOR "#Print correct coeff\n" NO_COLOR);
+    }
+
+    if (number_coeff != 3)
+    {
+        printf(GREEN_COLOR "#Print next coeff\n" NO_COLOR);
     }
 }
 
@@ -77,6 +82,9 @@ void Input (double* coeff)
 
 void ModeSwitch (Modes* Mode, const char** argv, int argc)
 {
+    assert(Mode);
+    assert(argv);
+
     if (argc == 2)
     {
         if (strcmp(argv[1], "--help") == 0)
@@ -114,7 +122,7 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
 
 CompareResult compare(double a, double b)
 {
-    const double epsilon = 1e-6; //!renam
+    const double epsilon = 1e-6;
     int StatNan_a = isnan(a);
     int StatNan_b = isnan(b);
 
@@ -127,3 +135,4 @@ CompareResult compare(double a, double b)
         return NON_EQUAL;
     }
 }
+

@@ -10,7 +10,9 @@
 #ifndef UTIL_INCLUDE
 #define UTIL_INCLUDE
 
+#include <unistd.h>
 #include "solve.h"
+#include <ncurses.h>
 
 #define RED_COLOR               "\033[31m"
 #define NO_COLOR                "\033[0m"
@@ -39,7 +41,8 @@ enum CompareResult
     EQUAL        = 1,
 };
 
-void                Input (double* coeff);
+
+void                Input (double* coeff, const int number_coeff);
 void                Itog(Solution answer);
 void                ModeSwitch(Modes* Mode, const char* argv[], int argc);
 CompareResult       compare(double a, double b);

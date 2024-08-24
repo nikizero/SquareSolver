@@ -31,10 +31,9 @@ int main(int argc, const char** argv)
     {                                                                           // stderr, stdin, stdout, прочитать про логи и перенаправление потоков вывода
         struct Quadr coefs = {0, 0, 0};                                         // Можно было задать как Quadr coefs = {.a = 0,.b = 0,.c = 0}
         struct Solution answer = {0, 0, NO_SOLUTIONS};
-
-        Input (&coefs.a);
-        Input (&coefs.b);
-        Input (&coefs.c);
+        Input (&coefs.a, 1);
+        Input (&coefs.b, 2);
+        Input (&coefs.c, 3);
         answer.num_roots = Solver (coefs, &answer);
         Itog (answer);
     }
