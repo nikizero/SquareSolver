@@ -114,8 +114,8 @@ void ModeSwitch (Modes* Mode, const char** argv, int argc)
 }
 
 /*!
-Сравнивает два double числа, также NAN методом сравнивания модули разности с
-допустимой погрешностью эпсилон e
+Сравнивает два double числа методом сравнивания модули разности с
+допустимой погрешностью эпсилон e, также выдает равенство, если оба NAN
 \param[in] a, b сравниваемые числа
 \return возвращает результат сравнения
 */
@@ -136,7 +136,14 @@ CompareResult compare(double a, double b)
     }
 }
 
-void printing(char* strings[])
+/*!
+Управляет печатью проведённых тестов, запускает progress bar
+\param[in] all_tests[] список с результатами всех тестов
+\param[in] numtests вводит количество тестов
+\return возвращает результат сравнения
+*/
+
+void printing(Test all_tests[], size_t numtests)
 {
    double row = 0;
    double col = 0;
@@ -145,33 +152,90 @@ void printing(char* strings[])
    getmaxyx(stdscr, row, col);
    Coord coord_ukaz = {0, row - 1, 0, 0};
 
-   for (int i = 10; i >= 0; i--)
+   move(coord_ukaz.y_progres, coord_ukaz.x_progres);
+   printw("[");
+   move(coord_ukaz.y_progres, coord_ukaz.x_progres + numtests + 1);
+   printw("]");
+   coord_ukaz.x_progres = 1;
+
+   for (size_t i = numtests; i > 0; i--)
    {
+        int num_test_printing = numtests - i;
+
         move(coord_ukaz.y_test, coord_ukaz.x_test);
-        insnstr(strings[i], -1);
+
+        if (all_tests[num_test_printing].result_of_test == PASS)
+        {
+            right_printing(all_tests[num_test_printing]);
+        }
+        else
+        {
+            failed_printing(all_tests[num_test_printing]);
+            refresh();
+            sleep(3);
+            coord_ukaz.y_test = coord_ukaz.y_test + 3 ;
+        }
+
         move(coord_ukaz.y_progres, coord_ukaz.x_progres);
         printw("=");
         refresh();
+
         sleep(1);
+
         if (coord_ukaz.y_test <= coord_ukaz.y_progres - 3)
         {
             coord_ukaz.y_test++;
         }
         else
         {
+            sleep(1);
             while (coord_ukaz.y_test>=0)
             {
-                clrtoeol();
                 move(coord_ukaz.y_test, coord_ukaz.x_test);
                 coord_ukaz.y_test --;
+                clrtoeol();
             }
             coord_ukaz.y_test = 0;
             move(coord_ukaz.y_test, coord_ukaz.x_test);
-            clrtoeol();
             refresh();
         }
-   coord_ukaz.x_progres ++;
-   };
+        coord_ukaz.x_progres ++;
+   }
    getch();
    endwin();
+}
+
+/*!
+Распечатывает заданный правильный тест
+\param[in] etalon один из тестов из списка
+*/
+
+void failed_printing(Test etalon)
+{
+    if (etalon.TestNum > 9)
+    {
+        char probel_opt = ' ';
+    }
+    else
+    {
+        char probel_opt = '';
+    }
+
+    printw("----------------------------------------------------------------------------------------------------------------------\n"
+           "Test N %d Failed:  a = %+lf, b = %+lf, c = %+lf, x1      = %+lf, x2      = %+lf, num_roots   = %d\n"
+           "Right Test:                                             %c       x1right = %+lf, x2right = %+lf, numsolright = %d \n"
+           "----------------------------------------------------------------------------------------------------------------------\n",
+            etalon.TestNum, etalon.a, etalon.b, etalon.c, etalon.res_of_solving.x1, etalon.res_of_solving.x2,
+            etalon.res_of_solving.num_roots, probel_opt,etalon.x1right,
+            etalon.x2right, etalon.numsolright);
+}
+
+/*!
+Распечатывает заданный неправильный тест
+\param[in] etalon один из тестов из списка
+*/
+
+void right_printing(Test etalon)
+{
+    printw("Test N %d correct \n", etalon.TestNum);
 }
