@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "__config": "cpp"
+        "__config": "cpp",
+        "__bit_reference": "cpp",
+        "ios": "cpp"
     }
 }

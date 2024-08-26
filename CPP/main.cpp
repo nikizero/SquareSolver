@@ -24,7 +24,7 @@ argv[1] используется для выбора режима запуска
 
 int main(int argc, const char** argv)
 {
-    Modes Mode = TEST;
+    Modes Mode = UNExPECTED_COMMAND;
     ModeSwitch(&Mode, argv, argc);
 
     if (Mode == START)

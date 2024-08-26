@@ -40,5 +40,11 @@ struct Test
     Roots numsolright;
 };
 
+struct Output
+{
+    Test etalon;
+    Solution answer;
+};
+
 void               StartTest ();
 #endif

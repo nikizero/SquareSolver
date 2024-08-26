@@ -43,15 +43,21 @@ void StartTest ()
         {16,  1e-3, -2e-3, 1,  NAN,       NAN,       NO_SOLUTIONS  },
         {17, -1e-2, -2e-4, 3, -17.330511, 17.310511, TWO_ROOTS     }
     };
+
+//    Output test_result[] =
+//    {
+//        {{1,   0,     0,    0,  NAN,       NAN,       INFINITE_ROOTS}, {NAN, NAN, INFINITE_ROOTS,}};
+//    };
+
     size_t numtests = sizeof(etalon) / sizeof(etalon[0]);
 
     for (size_t i = 0; i < numtests; i++)
+    {
+        if (Testing (etalon[i])== FAIL)
         {
-            if (Testing (etalon[i]) == 0)
-            {
-                break;
-            }
+            break;
         }
+    };
 }
 
 /*!
@@ -62,17 +68,18 @@ void StartTest ()
 
 static Res_Test Testing (Test etalon)
 {
+//    {etalon, answer};
     Solution answer = {0, 0, NO_SOLUTIONS};
     Quadr coefs     = {etalon.a, etalon.b, etalon.c};
 
     answer.num_roots = Solver (coefs, &answer);
     CompareResult compare_x1_res = compare (answer.x1, etalon.x1right);
-    CompareResult compare_x2_res = compare (answer.x2, etalon.x2right); //Сделать  %+lf
+    CompareResult compare_x2_res = compare (answer.x2, etalon.x2right);
 
     if (answer.num_roots != etalon.numsolright || compare_x1_res == NON_EQUAL || compare_x2_res == NON_EQUAL)
-    { //REFORMAT
+    {
         printf(RED_COLOR "Test N %d Failed:" NO_COLOR " a = %lf, b = %lf, c = %lf, x1      = %+lf, x2      = %+lf, num_roots   = %d\n"
-               RED_COLOR "Right Test:      " NO_COLOR "                                            x1right = %+lf, x2right = %+lf, numsolright = %d \n", etalon.TestNum, etalon.a, etalon.b, etalon.c, answer.x1, answer.x2, answer.num_roots, etalon.x1right, etalon.x2right, etalon.numsolright);
+        RED_COLOR "Right Test:      " NO_COLOR "                                            x1right = %+lf, x2right = %+lf, numsolright = %d \n", etalon.TestNum, etalon.a, etalon.b, etalon.c, answer.x1, answer.x2, answer.num_roots, etalon.x1right, etalon.x2right, etalon.numsolright);
         printf(RED_COLOR "Test's stoped after first failed test" NO_COLOR);
         return FAIL;
     }

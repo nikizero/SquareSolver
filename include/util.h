@@ -10,9 +10,10 @@
 #ifndef UTIL_INCLUDE
 #define UTIL_INCLUDE
 
-#include <unistd.h>
 #include "solve.h"
 #include <ncurses.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #define RED_COLOR               "\033[31m"
 #define NO_COLOR                "\033[0m"
@@ -29,6 +30,7 @@ enum Modes
 {
     TEST                 = 0,
     START                = 1,
+    UNExPECTED_COMMAND   = 3
 };
 
 /*!
@@ -41,9 +43,17 @@ enum CompareResult
     EQUAL        = 1,
 };
 
+struct Coord
+{
+    double x_progres;
+    double y_progres;
+    double x_test;
+    double y_test;
+};
 
-void                Input (double* coeff, const int number_coeff);
+void                Input (double* x, const int number_x);
 void                Itog(Solution answer);
+void                printing(char* strings[]);
 void                ModeSwitch(Modes* Mode, const char* argv[], int argc);
 CompareResult       compare(double a, double b);
 #endif

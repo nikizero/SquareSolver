@@ -52,10 +52,10 @@ static void CleanBuf ()
 /*!
 Обрабатывает ввод коэффицента уравнения. Если ввод неправильный,
 очищает буфер, делает повторный запрос и вывод ошибку.
-\param[out] coeff адресс поля структурной переменой, содержащей очередной коэффицент уравнения
+\param[out] x адресс поля структурной переменой, содержащей очередной коэффицент уравнения
 */
 
-void Input (double* coeff, const int number_coeff)
+void Input (double* coeff, const int number_x)
 {
     assert (coeff);
 
@@ -67,7 +67,7 @@ void Input (double* coeff, const int number_coeff)
         printf(RED_COLOR "#Print correct coeff\n" NO_COLOR);
     }
 
-    if (number_coeff != 3)
+    if (number_x != 3)
     {
         printf(GREEN_COLOR "#Print next coeff\n" NO_COLOR);
     }
@@ -136,3 +136,42 @@ CompareResult compare(double a, double b)
     }
 }
 
+void printing(char* strings[])
+{
+   double row = 0;
+   double col = 0;
+
+   initscr();
+   getmaxyx(stdscr, row, col);
+   Coord coord_ukaz = {0, row - 1, 0, 0};
+
+   for (int i = 10; i >= 0; i--)
+   {
+        move(coord_ukaz.y_test, coord_ukaz.x_test);
+        insnstr(strings[i], -1);
+        move(coord_ukaz.y_progres, coord_ukaz.x_progres);
+        printw("=");
+        refresh();
+        sleep(1);
+        if (coord_ukaz.y_test <= coord_ukaz.y_progres - 3)
+        {
+            coord_ukaz.y_test++;
+        }
+        else
+        {
+            while (coord_ukaz.y_test>=0)
+            {
+                clrtoeol();
+                move(coord_ukaz.y_test, coord_ukaz.x_test);
+                coord_ukaz.y_test --;
+            }
+            coord_ukaz.y_test = 0;
+            move(coord_ukaz.y_test, coord_ukaz.x_test);
+            clrtoeol();
+            refresh();
+        }
+   coord_ukaz.x_progres ++;
+   };
+   getch();
+   endwin();
+}
