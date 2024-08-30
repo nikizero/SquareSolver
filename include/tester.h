@@ -38,8 +38,12 @@ struct Test
     double x1right;
     double x2right;
     Roots numsolright;
-    Res_Test result_of_test;
-    Solution res_of_solving;
+};
+
+struct Output
+{
+    Test etalon;
+    Solution answer;
 };
 
 void               StartTest ();

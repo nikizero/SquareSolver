@@ -10,11 +10,10 @@
 #ifndef UTIL_INCLUDE
 #define UTIL_INCLUDE
 
+#include "solve.h"
 #include <ncurses.h>
 #include <stdio.h>
 #include <unistd.h>
-
-#include "tester.h"
 
 #define RED_COLOR               "\033[31m"
 #define NO_COLOR                "\033[0m"
@@ -54,9 +53,7 @@ struct Coord
 
 void                Input (double* x, const int number_x);
 void                Itog(Solution answer);
-void                printing(Test all_tests[], size_t numtests);
+void                printing(char* strings[]);
 void                ModeSwitch(Modes* Mode, const char* argv[], int argc);
-void                failed_printing(Test etalon);
-void                right_printing(Test etalon);
 CompareResult       compare(double a, double b);
 #endif
